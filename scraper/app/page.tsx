@@ -7,9 +7,9 @@ export default function Home() {
         Leads Scraper
       </h1>
       <section className="flex gap-2">
-        <div className="flex flex gap-5">
-          <input type="text" className="w-72 h-10 utline-none focus:outline-none rounded-md p-2 bg-neutral-200 text-black"/>
-          <input type="text"  className="w-72 h-10 utline-none focus:outline-none rounded-md p-2 bg-neutral-200 text-black"  />
+        <div className="flex gap-5">
+          <input type="text" className="w-72 h-10 utline-none focus:outline-none rounded-md p-2 bg-neutral-200 text-black" placeholder="Enter Business Type e.g Roofers"/>
+          <input type="text"  className="w-72 h-10 utline-none focus:outline-none rounded-md p-2 bg-neutral-200 text-black" placeholder="Enter Location"  />
         </div> 
         <div>
           <button className="bg-black ring-2 flex items-center justify-center ring-white shadow-md shadow-neutral-700  text-center p-3 px-5 text-white w-max rounded-md h-10 hover:translate-y-1 transition ">Search</button>
