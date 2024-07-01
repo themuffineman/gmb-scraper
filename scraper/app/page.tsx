@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Lead from "./components/lead";
 
 export default function Home() {
   return (
@@ -12,11 +13,12 @@ export default function Home() {
           <input type="text"  className="w-72 h-10 utline-none focus:outline-none rounded-md p-2 bg-neutral-200 text-black" placeholder="Enter Location"  />
         </div> 
         <div>
-          <button className="bg-black ring-2 flex items-center justify-center ring-white shadow-md shadow-neutral-700  text-center p-3 px-5 text-white w-max rounded-md h-10 hover:translate-y-1 transition ">Search</button>
+          <button className="bg-neutral-950 hover:ring-1 flex items-center justify-center hover:ring-neutral-900   text-center p-4 px-5 text-white w-max rounded-md h-10 hover:scale-[1px] transition ">Search</button>
         </div>
       </section> 
-      <section>
-
+      <section className="grid grid-flow-row gap-4 grid-cols-1 mt-5">
+        <Lead name="BuzCorp" emails={['hello','hi','bye']} phone="12345" website="http://localhost:3000"/>
+        <Lead name="BuzCorp" emails={['hello','hi','bye']} phone="12345" website="http://localhost:3000"/>
       </section>
     </main>
   );
