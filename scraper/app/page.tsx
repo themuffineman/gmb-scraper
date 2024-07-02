@@ -98,7 +98,7 @@ export default function Home() {
       </section> 
       <section className="grid grid-flow-row gap-4 grid-cols-1 mt-5">
         {leadsData?.map((lead)=>(
-          <Lead key={lead.name} name={lead.name} emails={lead.emails} website={lead.url} phone="######"/>
+          <Lead name={lead.name} emails={lead.emails} website={lead.url} phone="######"/>
         ))}
         <button className={` ${loadMore? "flex" : "hidden"} rounded-md p-3 bg-neutral-950 ring-1 ring-neutral-900 hover:scale-[1px] transition hover:bg-neutral-900 hover:scale text-white`} onClick={()=>{
           setPagesCount((prev)=> prev+1)
