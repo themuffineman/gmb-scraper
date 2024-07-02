@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Lead from "./components/lead";
 import { useState } from "react";
-import { ExecFileSyncOptionsWithBufferEncoding } from "child_process";
 
 
 export default function Home() {
@@ -83,8 +82,8 @@ export default function Home() {
           fetchLeads()
         }}>
           <div className="flex gap-5">
-            <input type="text" className="w-72 h-10 utline-none focus:outline-none rounded-md p-2 bg-neutral-200 text-black" placeholder="Enter Business Type e.g Roofers" value={service} onChange={(e)=> setService(e.target.value) }/>
-            <input type="text"  className="w-72 h-10 utline-none focus:outline-none rounded-md p-2 bg-neutral-200 text-black" placeholder="Enter Location"  value={location} onChange={(e)=> setLocation(e.target.value) }/>
+            <input required={true} type="text" className="w-72 h-10 utline-none focus:outline-none rounded-md p-2 bg-neutral-200 text-black" placeholder="Enter Business Type e.g Roofers" value={service} onChange={(e)=> setService(e.target.value) }/>
+            <input required={true} type="text"  className="w-72 h-10 utline-none focus:outline-none rounded-md p-2 bg-neutral-200 text-black" placeholder="Enter Location"  value={location} onChange={(e)=> setLocation(e.target.value) }/>
           </div> 
           <div>
             <button className={`bg-neutral-950 hover:ring-1 flex items-center justify-center hover:ring-neutral-900   text-center p-4 px-5 text-white w-max rounded-md h-10 hover:scale-[1px] transition`} type="submit" >Search</button>
