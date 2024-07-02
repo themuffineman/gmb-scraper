@@ -32,10 +32,11 @@ export default function Home() {
       });
 
       socket.addEventListener('error', (error) => {
-        console.error('Conncetion error:', error);
+        console.error('Connection error:', error);
         setStatusUpdate(`Failed to connect to Scraper`);
         setTimeout(()=>{
           setStatus(false)
+          setLoadMore(true)
         },3000)
         socket.close()
       });
@@ -54,7 +55,7 @@ export default function Home() {
       }
       });
 
-      await fetch(`https://gmb-scraper-server.onrender.com/scrape?service=${service}&location=${location}&pageNumber=${pageCount}`)  //papa-johns.com
+      await fetch(`https://gmb-scraper-server.onrender.com/scrape?service=${service}&location=${location}&pageNumber=${pageCount}`)
       setStatus(false)
       setLoadMore(true)
     }catch (error) {
@@ -72,7 +73,7 @@ export default function Home() {
   }
 
   function cancelRequest(){
-    fetch('https://gmb-scraper-server.onrender.com/cancel')
+    fetch('https://gmb-scraper-server.onrender.com/cancel-process')
   }
 
   return (
