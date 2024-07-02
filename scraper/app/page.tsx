@@ -70,6 +70,11 @@ export default function Home() {
       setStatusUpdate('Error parsing message')
     }
   }
+
+  function cancelRequest(){
+    fetch('https://gmb-scraper-server.onrender.com/cancel')
+  }
+
   return (
     <main className="h-screen w-full flex flex-col items-center justify-center p-40 pt-5 bg-grid-neutral-100/[0.1] bg-black text-white">
       <h1 className="text-3xl sm:text-7xl tracking-tighter font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 pb-8">
@@ -104,7 +109,7 @@ export default function Home() {
         <p className="text-white flex items-center justify-center">
           {statusUpdate}
         </p>
-        <button className=" rounded-md p-3 bg-neutral-950 ring-1 ring-neutral-900 hover:scale-[1px] transition hover:bg-red-600 text-white ">Cancel</button>
+        <button onClick={ ()=> cancelRequest() } className=" rounded-md p-3 bg-neutral-950 ring-1 ring-neutral-900 hover:scale-[1px] transition hover:bg-red-600 text-white ">Cancel</button>
       </section>
     </main>
   );
