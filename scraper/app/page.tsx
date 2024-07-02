@@ -81,7 +81,7 @@ export default function Home() {
         Leads Scraper
       </h1>
       <section className="flex gap-2">
-        <form onSubmit={ (e)=> {
+        <form className="w-max h-max flex gap-2" onSubmit={ (e)=> {
           e.preventDefault()
           setPagesCount(0)
           fetchLeads()
