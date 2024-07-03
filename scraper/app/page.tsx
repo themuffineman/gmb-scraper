@@ -26,7 +26,7 @@ export default function Home() {
   async function fetchLeads(){
     try {
       setStatus(true)
-      const socket = new WebSocket('https://gmb-scraper-server.onrender.com');  
+      const socket = new WebSocket('wss://gmb-scraper-server.onrender.com');  
 
       socket.addEventListener('open', () => {
         setStatusUpdate('Connection to scraper established');
