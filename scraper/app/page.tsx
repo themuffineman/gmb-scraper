@@ -111,7 +111,6 @@ export default function Home() {
         {leadsData?.map((lead)=>(
           <Lead key={lead.url} name={lead.name} emails={lead.emails} website={lead.url} phone="######"/>
         ))}
-        <Lead name={'Royal Roofing & Construction of Texas'} emails={[]} website={'google.com'} phone="1234"/>
         <button className={` ${loadMore? "flex" : "hidden"} w-max rounded-md p-3 bg-neutral-950 ring-1 ring-neutral-900 hover:scale-[1px] transition hover:bg-neutral-900 hover:scale text-white`} onClick={()=>{
           setPagesCount((prev)=> prev+1)
           fetchLeads()
