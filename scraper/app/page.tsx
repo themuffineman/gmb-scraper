@@ -66,7 +66,11 @@ export default function Home() {
     if(message.type === 'status'){
       setStatusUpdate(message.data as string)
     }else if (message.type === 'lead'){
-      setLeadsData((prev) => [...(prev || []), message.data as Leads]);
+      setLeadsData((prev)=> {
+        const copyPrev = prev? JSON.parse(JSON.stringify(prev)) : []
+        copyPrev.push(message.data as Leads)
+        return copyPrev
+      })
       console.log('Received a lead', message.data as Leads)
     }else if(message.type === 'id'){
       setWsId(message.data as string)
