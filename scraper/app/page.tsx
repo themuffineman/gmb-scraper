@@ -70,7 +70,7 @@ export default function Home() {
     }else if(message.type === 'id'){
       setWsId(message.data as string)
       alert(`user id is: ${message.data as string}`)
-      await fetch(`https://gmb-scraper-server.onrender.com/scrape?service=${service}&location=${location}&pageNumber=${pageCount}&clientId=${wsId}`)
+      await fetch(`https://gmb-scraper-server.onrender.com/scrape?service=${service}&location=${location}&pageNumber=${pageCount}&clientId=${message.data as string}`)
       setStatus(false)
       setLoadMore(true)
     }else{
