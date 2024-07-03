@@ -72,10 +72,9 @@ export default function Home() {
         copyPrev.push(lead)
         return copyPrev
       })
-      console.log('Received a lead', message.data as Leads)
+      console.log('Received a lead', message.data)
     }else if(message.type === 'id'){
       setWsId(message.data as string)
-      alert(`user id is: ${message.data as string}`)
       await fetch(`https://gmb-scraper-server.onrender.com/scrape?service=${service}&location=${location}&pageNumber=${pageCount}&clientId=${message.data as string}`)
       setStatus(false)
       setLoadMore(true)
