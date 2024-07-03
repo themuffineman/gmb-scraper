@@ -67,6 +67,7 @@ export default function Home() {
       setStatusUpdate(message.data as string)
     }else if (message.type === 'lead'){
       setLeadsData((prev) => [...(prev || []), message.data as Leads]);
+      console.log('Received a lead', message.data as Leads)
     }else if(message.type === 'id'){
       setWsId(message.data as string)
       alert(`user id is: ${message.data as string}`)
@@ -83,7 +84,7 @@ export default function Home() {
   }
 
   return (
-    <main className="h-screen w-full flex flex-col items-center justify-center p-40 pt-5 bg-grid-neutral-100/[0.1] bg-black text-white">
+    <main className="h-max w-full flex flex-col items-center justify-center p-40 pt-5 bg-grid-neutral-100/[0.1] bg-black text-white">
       <h1 className="text-3xl sm:text-7xl tracking-tighter font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 pb-8">
         Leads Scraper
       </h1>
@@ -102,11 +103,11 @@ export default function Home() {
           </div>
         </form>
       </section> 
-      <section className="grid grid-flow-row gap-4 grid-cols-1 mt-5">
+      <section className="grid grid-flow-row gap-4 grid-cols-1  mt-5">
         {leadsData?.map((lead)=>(
           <Lead key={lead.url} name={lead.name} emails={lead.emails} website={lead.url} phone="######"/>
         ))}
-        <button className={` ${loadMore? "flex" : "hidden"} rounded-md p-3 bg-neutral-950 ring-1 ring-neutral-900 hover:scale-[1px] transition hover:bg-neutral-900 hover:scale text-white`} onClick={()=>{
+        <button className={` ${loadMore? "flex" : "hidden"} w-max rounded-md p-3 bg-neutral-950 ring-1 ring-neutral-900 hover:scale-[1px] transition hover:bg-neutral-900 hover:scale text-white`} onClick={()=>{
           setPagesCount((prev)=> prev+1)
           fetchLeads()
         }}>Load More</button>
