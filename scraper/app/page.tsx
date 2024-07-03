@@ -27,9 +27,18 @@ export default function Home() {
     try {
       setStatus(true)
       const socket = new WebSocket('wss://gmb-scraper-server.onrender.com/scrape');
-
+      
       socket.addEventListener('open', () => {
         setStatusUpdate('Connection to scraper established');
+      });
+      
+      socket.addEventListener('message', event => {
+        try {
+          const message = JSON.parse(event.data);
+          handleMessage(message);
+      } catch (err) {
+          console.error('Error parsing WebSocket message:', err);
+      }
       });
 
       socket.addEventListener('error', (error) => {
@@ -46,16 +55,6 @@ export default function Home() {
         setStatusUpdate('Conncetion to scraper closed')
         setStatus(false)
       })
-
-      socket.addEventListener('message', event => {
-        try {
-          const message = JSON.parse(event.data);
-          handleMessage(message);
-      } catch (err) {
-          console.error('Error parsing WebSocket message:', err);
-      }
-      });
-
       await fetch(`https://gmb-scraper-server.onrender.com/scrape?service=${service}&location=${location}&pageNumber=${pageCount}&clientId=${wsId}`)
       setStatus(false)
       setLoadMore(true)
@@ -70,6 +69,7 @@ export default function Home() {
       setLeadsData((prev) => [...(prev || []), message.data as Leads]);
     }else if(message.type === 'id'){
       setWsId(message.data as string)
+      alert(`user id is: ${message.data as string}`)
     }else{
       setStatusUpdate('Error parsing message')
     }
