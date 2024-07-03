@@ -111,12 +111,13 @@ export default function Home() {
         {leadsData?.map((lead)=>(
           <Lead key={lead.url} name={lead.name} emails={lead.emails} website={lead.url} phone="######"/>
         ))}
+        <Lead name={'Royal Roofing & Construction of Texas'} emails={[]} website={'google.com'} phone="1234"/>
         <button className={` ${loadMore? "flex" : "hidden"} w-max rounded-md p-3 bg-neutral-950 ring-1 ring-neutral-900 hover:scale-[1px] transition hover:bg-neutral-900 hover:scale text-white`} onClick={()=>{
           setPagesCount((prev)=> prev+1)
           fetchLeads()
         }}>Load More</button>
       </section>
-      <section className={` ${status? 'flex' : 'hidden'} gap-5 items-center rounded-md bg-neutral-950 p-4 ring-1 ring-neutral-900 fixed bottom-3 left-1/2 -translate-x-1/2`}>
+      <section className={` ${status? 'flex' : 'hidden'} gap-5 items-center rounded-md bg-neutral-950 p-4 ring-1 ring-neutral-900 fixed bottom-3 left-1/2 -translate-x-1/2 w-max`}>
         <div className="size-5 rounded-full border-2 border-neutral-700 border-t-neutral-400 animate-spin"/>
         <p className="text-white flex items-center justify-center">
           {statusUpdate}
