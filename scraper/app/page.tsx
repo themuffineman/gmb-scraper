@@ -46,23 +46,23 @@ export default function Home() {
         setStatusUpdate(`Failed to connect to Scraper`);
         setTimeout(()=>{
           setStatus(false)
-          setLoadMore(true)
+          setLoadMore(false)
         },3000)
         socket.close()
       });
 
       socket.addEventListener('close', ()=>{
-        setStatusUpdate('Conncetion to scraper closed')
+        setStatusUpdate('Connection to scraper closed')
         setStatus(false)
+        setLoadMore(false)
       })
-      await fetch(`https://gmb-scraper-server.onrender.com/scrape?service=${service}&location=${location}&pageNumber=${pageCount}&clientId=${wsId}`)
-      setStatus(false)
-      setLoadMore(true)
+      
     }catch (error) {
       console.error(error)
+      setLoadMore(false)
     }
   }
-  function handleMessage(message: Message){
+  async function handleMessage(message: Message){
     if(message.type === 'status'){
       setStatusUpdate(message.data as string)
     }else if (message.type === 'lead'){
@@ -70,6 +70,9 @@ export default function Home() {
     }else if(message.type === 'id'){
       setWsId(message.data as string)
       alert(`user id is: ${message.data as string}`)
+      await fetch(`https://gmb-scraper-server.onrender.com/scrape?service=${service}&location=${location}&pageNumber=${pageCount}&clientId=${wsId}`)
+      setStatus(false)
+      setLoadMore(true)
     }else{
       setStatusUpdate('Error parsing message')
     }
