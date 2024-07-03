@@ -11,7 +11,7 @@ export default function Home() {
     url: string
   }
   interface Message{
-    type: "status" | "lead",
+    type: "status" | "lead" | "id",
     data: string | Leads
   }
   const [status, setStatus] = useState<boolean>(false)
@@ -21,6 +21,7 @@ export default function Home() {
   const [service, setService] = useState<string | undefined>()
   const [location, setLocation] = useState<string | undefined>()
   const [loadMore, setLoadMore]= useState<boolean>(false)
+  const [wsId, setWsId] = useState<string>('')
 
   async function fetchLeads(){
     try {
@@ -55,7 +56,7 @@ export default function Home() {
       }
       });
 
-      await fetch(`https://gmb-scraper-server.onrender.com/scrape?service=${service}&location=${location}&pageNumber=${pageCount}`)
+      await fetch(`https://gmb-scraper-server.onrender.com/scrape?service=${service}&location=${location}&pageNumber=${pageCount}&clientId=${wsId}`)
       setStatus(false)
       setLoadMore(true)
     }catch (error) {
@@ -67,13 +68,15 @@ export default function Home() {
       setStatusUpdate(message.data as string)
     }else if (message.type === 'lead'){
       setLeadsData((prev) => [...(prev || []), message.data as Leads]);
+    }else if(message.type === 'id'){
+      setWsId(message.data as string)
     }else{
       setStatusUpdate('Error parsing message')
     }
   }
 
   function cancelRequest(){
-    fetch('https://gmb-scraper-server.onrender.com/cancel-process')
+    fetch(`https://gmb-scraper-server.onrender.com/cancel-process?clientId=${wsId}`)
   }
 
   return (
