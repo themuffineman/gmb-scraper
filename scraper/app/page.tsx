@@ -68,7 +68,8 @@ export default function Home() {
     }else if (message.type === 'lead'){
       setLeadsData((prev)=> {
         const copyPrev = prev? JSON.parse(JSON.stringify(prev)) : []
-        copyPrev.push(message.data as Leads)
+        const newLead = JSON.parse(message.data as Leads)
+        copyPrev.push(newLead)
         return copyPrev
       })
       console.log('Received a lead', message.data as Leads)
