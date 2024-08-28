@@ -7,8 +7,13 @@ import { useState } from "react";
 export default function Home() {
   interface Leads{
     name: string,
-    emails: string[]
-    url: string
+    emails?: string[]
+    url?: string
+    phone?: string
+    performance?: {speed:string, tti: string, diagnostics: any}
+    ads?: string[]
+    techStack?: string[]
+    socials?: {twitter?: string, instagram?: string, facebook?: string, linkedin?: string, youtube?: string}
   }
   interface Message{
     type: "status" | "lead" | "id",
@@ -109,7 +114,7 @@ export default function Home() {
       </section> 
       <section className="grid grid-flow-row gap-4 grid-cols-1  mt-5">
         {leadsData?.map((lead)=>(
-          <Lead key={lead.url} name={lead.name} emails={lead.emails} website={lead.url} phone="######"/>
+          <Lead key={lead.name} name={lead.name} emails={lead.emails} url={lead.url} phone={lead.phone} socials={lead.socials} performance={lead.performance} ads={lead.ads} techStack={lead.techStack}/>
         ))}
         <button className={` ${loadMore? "flex" : "hidden"} w-max rounded-md p-3 bg-neutral-950 ring-1 ring-neutral-900 hover:scale-[1px] transition hover:bg-neutral-900 hover:scale text-white`} onClick={()=>{
           setPagesCount((prev)=> prev+1)
