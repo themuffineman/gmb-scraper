@@ -14,7 +14,7 @@ interface LeadProps{
 
 const Lead: React.FC<LeadProps> = ({name, phone, emails, url, performance, socials, ads, techStack}) => {
   return (
-    <div className="flex mx-auto gap-2 items-center p-5 py-3 w-max bg-neutral-950 rounded-md hover:ring-neutral-900 hover:ring-1">
+    <div className="flex mx-auto gap-2 items-center p-4 py-3 w-max bg-neutral-950 rounded-md hover:ring-neutral-900 hover:ring-1">
         <div className="text-white text-sm rounded-md hover:bg-neutral-800 p-2 cursor-pointer w-[13rem] truncate">
             {name}
         </div>
