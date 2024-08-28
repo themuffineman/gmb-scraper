@@ -10,7 +10,7 @@ interface LeadProps{
     ads?: string[]
     techStack?: string[]
     socials?: {twitter?: string, instagram?: string, facebook?: string, linkedin?: string, youtube?:string}
-  }
+}
 
 const Lead: React.FC<LeadProps> = ({name, phone, emails, url, performance, socials, ads, techStack}) => {
   return (
@@ -34,7 +34,7 @@ const Lead: React.FC<LeadProps> = ({name, phone, emails, url, performance, socia
             </PopoverTrigger>
             <PopoverContent className='bg-neutral-950 p-1 border-neutral-900 w-max'>
                 {emails?.map((email)=>(
-                    <p className='p-3 text-white hover:bg-neutral-800 rounded-md w-full h-max cursor-pointer'>{email}</p>
+                    <p key={email} className='p-3 text-white hover:bg-neutral-800 rounded-md w-full h-max cursor-pointer'>{email}</p>
                 ))}
                 {emails?.length === 0 && <p className="p-3 text-white hover:bg-neutral-800 text-sm rounded-md w-max h-max cursor-pointer">No emails found</p>}
             </PopoverContent>
@@ -83,7 +83,7 @@ const Lead: React.FC<LeadProps> = ({name, phone, emails, url, performance, socia
             </PopoverTrigger>
             <PopoverContent className='bg-neutral-950 p-1 border-neutral-900 w-max'>
                 {ads?.map((ad)=>(
-                    <p className='p-3 text-white hover:bg-neutral-800 rounded-md w-full h-max cursor-pointer'>{ad}</p>
+                    <p key={ad} className='p-3 text-white hover:bg-neutral-800 rounded-md w-full h-max cursor-pointer'>{ad}</p>
                 ))}
                 {ads?.length === 0 && <p className="p-3 text-white hover:bg-neutral-800 rounded-md w-max h-max cursor-pointer">No ad platforms found</p>}
             </PopoverContent>
@@ -95,7 +95,7 @@ const Lead: React.FC<LeadProps> = ({name, phone, emails, url, performance, socia
             </PopoverTrigger>
             <PopoverContent className='bg-neutral-950 p-1 border-neutral-900 w-max'>
                 {techStack?.map((stack)=>(
-                    <p className='p-3 text-white text-sm hover:bg-neutral-800 rounded-md w-full h-max cursor-pointer'>{stack}</p>
+                    <p key={stack} className='p-3 text-white text-sm hover:bg-neutral-800 rounded-md w-full h-max cursor-pointer'>{stack}</p>
                 ))}
                 {techStack?.length === 0 && <p className="p-3 text-white hover:bg-neutral-800 rounded-md w-max h-max cursor-pointer">Couldn't determine stack</p>}
             </PopoverContent>
