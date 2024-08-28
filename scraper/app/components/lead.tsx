@@ -97,7 +97,7 @@ const Lead: React.FC<LeadProps> = ({name, phone, emails, url, performance, socia
                 {techStack?.map((stack)=>(
                     <p key={stack} className='p-3 text-white text-sm hover:bg-neutral-800 rounded-md w-full h-max cursor-pointer'>{stack}</p>
                 ))}
-                {techStack?.length === 0 && <p className="p-3 text-white hover:bg-neutral-800 rounded-md w-max h-max cursor-pointer">Couldn't determine stack</p>}
+                {techStack?.length === 0 && <p className="p-3 text-white hover:bg-neutral-800 rounded-md w-max h-max cursor-pointer">Couldn&apos;t determine stack</p>}
             </PopoverContent>
         </Popover>
     </div>
