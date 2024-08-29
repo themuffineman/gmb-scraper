@@ -27,6 +27,7 @@ export default function Home() {
   const [location, setLocation] = useState<string | undefined>()
   const [loadMore, setLoadMore]= useState<boolean>(false)
   const [wsId, setWsId] = useState<string>('')
+  const [isWaitlistHidden, setWaitlistHidden] = useState<boolean>(false)
 
   async function fetchLeads(){
     try {
@@ -94,11 +95,14 @@ export default function Home() {
 
   return (
     <main className="min-h-screen w-full flex flex-col items-center justify-center p-40 pt-5 bg-grid-neutral-100/[0.1] bg-black text-white">
-      <h1 className="text-3xl sm:text-7xl tracking-tighter font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 pb-8">
-        Pendora Scraper
-      </h1>
+      <div className="flex flex-col gap-3 items-center  pb-8">
+        <h1 className="text-3xl sm:text-7xl tracking-tighter font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500">
+          Pendora
+        </h1>
+        <span className="text-base text-white font-light text-center">Lead gen for freelance web developers. <br/>Filter out all the noise and find your ideal client</span>
+      </div>
       <section className="flex gap-2">
-        <form className="w-max h-max flex gap-2" onSubmit={ (e)=> {
+        <form className="w-full h-max flex gap-2" onSubmit={ (e)=> {
           e.preventDefault()
           setPagesCount(0)
           fetchLeads()
@@ -128,6 +132,14 @@ export default function Home() {
         </p>
         <button onClick={ ()=> cancelRequest() } className=" rounded-md p-3 bg-neutral-950 ring-1 ring-neutral-900 hover:scale-[1px] transition hover:bg-red-600 text-white ">Cancel</button>
       </section>
+      <form action="https://submit-form.com/vm5aKio40" className={`fixed ${isWaitlistHidden ? '-bottom-40 -right-2' : 'bottom-5 right-10'} transition-all duration-300 flex flex-col gap-2 items-center  w-[20rem] rounded-md bg-neutral-950 p-3 ring-1 ring-neutral-900 hover:scale-[1px] hover:scale`}>
+        <div className="w-full flex items-center justify-start ">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" className="cursor-pointer hover:bg-neutral-800 rounded-full" onClick={()=> {setWaitlistHidden(prev => !prev)}} height="28" fill="#FFFFFF" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm45.66-109.66a8,8,0,0,1,0,11.32l-40,40a8,8,0,0,1-11.32,0l-40-40a8,8,0,0,1,11.32-11.32L128,140.69l34.34-34.35A8,8,0,0,1,173.66,106.34Z"></path></svg>
+        </div>
+        <div className="text-base font-light text-white text-center">Get 30 days for free when we launch the full version.</div>
+        <input className="w-full h-10 outline-none focus:outline-none rounded-md p-2 bg-neutral-200 text-black" type="email" id="email" name="email" placeholder="Email" required={true} />
+        <button type="submit" className="w-full rounded-md p-3 bg-yellow-200 ring-1 ring-neutral-900 hover:scale-[1px] transition hover:bg-yellow-300 hover:scale text-black">Get on waitlist</button>
+      </form>
     </main>
   );
 }
