@@ -93,6 +93,54 @@ export default function Home() {
     fetch(`https://gmb-scraper-server.onrender.com/cancel-process?clientId=${wsId}`)
   }
 
+  function convertToCSV(data: any) {
+    const headers = [
+        "name", "emails", "url", "phone", 
+        "performance.speed", "performance.tti", "performance.diagnostics",
+        "ads", "techStack", 
+        "socials.twitter", "socials.instagram", "socials.facebook", "socials.linkedin", "socials.youtube"
+    ];
+
+    const csvRows = [];
+    // Add headers row
+    csvRows.push(headers.join(','));
+
+    // Loop through each lead object and convert to CSV row
+    for (const lead of data) {
+        const row = [];
+        row.push(lead.name || "");
+        row.push(lead.emails ? lead.emails.join(';') : "");
+        row.push(lead.url || "");
+        row.push(lead.phone || "");
+        row.push(lead.performance?.speed || "");
+        row.push(lead.performance?.tti || "");
+        row.push(JSON.stringify(lead.performance?.diagnostics) || "");
+        row.push(lead.ads ? lead.ads.join(';') : "");
+        row.push(lead.techStack ? lead.techStack.join(';') : "");
+        row.push(lead.socials?.twitter || "");
+        row.push(lead.socials?.instagram || "");
+        row.push(lead.socials?.facebook || "");
+        row.push(lead.socials?.linkedin || "");
+        row.push(lead.socials?.youtube || "");
+        csvRows.push(row.join(','));
+    }
+
+    return csvRows.join('\n');
+  }
+
+  function downloadCSV() {
+    const csv = convertToCSV(leadsData);
+    const csvBlob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(csvBlob);
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', 'leadsbypendora.csv');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
   return (
     <main className="min-h-screen w-full flex flex-col items-center justify-center p-40 pt-5 bg-grid-neutral-100/[0.1] bg-black text-white">
       <div className="flex flex-col gap-3 items-center  pb-8">
@@ -115,6 +163,10 @@ export default function Home() {
             <button className={`bg-neutral-950 hover:ring-1 flex items-center justify-center hover:ring-neutral-900   text-center p-4 px-5 text-white w-max rounded-md h-10 hover:scale-[1px] transition`} type="submit" >Search</button>
           </div>
         </form>
+        <div onClick={()=> { downloadCSV() }} className={`${leadsData.length > 0 ? 'flex' : 'hidden'} cursor-pointer gap-2 bg-neutral-950 hover:ring-1 items-center justify-center hover:ring-neutral-900   text-center p-4 px-5 text-white w-max rounded-md h-10 hover:scale-[1px] transition`}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#FFFFFF" viewBox="0 0 256 256"><path d="M216,112v96a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V112A16,16,0,0,1,56,96H80a8,8,0,0,1,0,16H56v96H200V112H176a8,8,0,0,1,0-16h24A16,16,0,0,1,216,112ZM93.66,69.66,120,43.31V136a8,8,0,0,0,16,0V43.31l26.34,26.35a8,8,0,0,0,11.32-11.32l-40-40a8,8,0,0,0-11.32,0l-40,40A8,8,0,0,0,93.66,69.66Z"></path></svg>
+          <span className="w-max">Export to CSV</span>
+        </div>
       </section> 
       <section className="grid grid-flow-row gap-4 grid-cols-1  mt-5">
         {leadsData?.map((lead)=>(
