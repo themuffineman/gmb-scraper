@@ -142,20 +142,20 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen w-full flex flex-col items-center justify-center p-40 pt-5 bg-grid-neutral-100/[0.1] bg-black text-white">
-      <div className="flex flex-col gap-3 items-center  pb-8">
-        <h1 className="text-3xl sm:text-7xl tracking-tighter font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500">
+    <main className="min-h-screen w-full flex flex-col items-center justify-center p-2 pt-5 bg-grid-neutral-100/[0.1] bg-black text-white">
+      <div className="flex flex-col gap-3 items-center  pb-8 w-full">
+        <h1 className="text-5xl sm:text-7xl tracking-tighter font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500">
           Pendora
         </h1>
-        <span className="text-base text-white font-light text-center">Lead gen for freelance web developers. <br/>Filter out all the noise and find your ideal client</span>
+        <span className="text-base w-full min-w-[280px] text-white font-light text-center">Lead gen for freelance web developers. <br/>Filter out all the noise and find your ideal client</span>
       </div>
-      <section className="flex gap-2">
-        <form className="w-full h-max flex gap-2" onSubmit={ (e)=> {
+      <section className="flex gap-2 flex-col lg:flex-row">
+        <form className="w-full h-max flex lg:flex-row flex-col gap-2" onSubmit={ (e)=> {
           e.preventDefault()
           setPagesCount(0)
           fetchLeads()
         }}>
-          <div className="flex gap-5">
+          <div className="flex lg:flex-row flex-col gap-5 ">
             <input required={true} type="text" className="w-72 h-10 utline-none focus:outline-none rounded-md p-2 bg-neutral-200 text-black" placeholder="Enter Business Type e.g Roofers" value={service} onChange={(e)=> setService(e.target.value) }/>
             <input required={true} type="text"  className="w-72 h-10 utline-none focus:outline-none rounded-md p-2 bg-neutral-200 text-black" placeholder="Enter Location"  value={location} onChange={(e)=> setLocation(e.target.value) }/>
           </div> 
@@ -177,16 +177,16 @@ export default function Home() {
           fetchLeads()
         }}>Load More</button>
       </section>
-      <section className={` ${status? 'flex' : 'hidden'} gap-5 items-center rounded-md bg-neutral-950 p-4 ring-1 ring-neutral-900 fixed bottom-3 left-1/2 -translate-x-1/2 w-max`}>
+      <section className={` ${status? 'flex' : 'hidden'} flex-col lg:flex-row z-50 gap-2 items-center rounded-md bg-neutral-950 p-2 ring-1 ring-neutral-900 fixed bottom-3 left-1/2 -translate-x-1/2 w-[19rem] truncate lg:w-max`}>
         <div className="size-5 rounded-full border-2 border-neutral-700 border-t-neutral-400 animate-spin"/>
-        <p className="text-white flex items-center justify-center">
+        <p className="text-white flex items-center justify-center truncate overflow-x-auto text-xs lg:text-base">
           {statusUpdate}
         </p>
         <button onClick={ ()=> cancelRequest() } className=" rounded-md p-3 bg-neutral-950 ring-1 ring-neutral-900 hover:scale-[1px] transition hover:bg-red-600 text-white ">Cancel</button>
       </section>
-      <form action="https://submit-form.com/vm5aKio40" className={`fixed ${isWaitlistHidden ? '-bottom-40 -right-2' : 'bottom-5 right-10'} transition-all duration-300 flex flex-col gap-2 items-center  w-[20rem] rounded-md bg-neutral-950 p-3 ring-1 ring-neutral-900 hover:scale-[1px] hover:scale`}>
-        <div className="w-full flex items-center justify-start ">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" className="cursor-pointer hover:bg-neutral-800 rounded-full" onClick={()=> {setWaitlistHidden(prev => !prev)}} height="28" fill="#FFFFFF" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm45.66-109.66a8,8,0,0,1,0,11.32l-40,40a8,8,0,0,1-11.32,0l-40-40a8,8,0,0,1,11.32-11.32L128,140.69l34.34-34.35A8,8,0,0,1,173.66,106.34Z"></path></svg>
+      <form action="https://submit-form.com/vm5aKio40" className={`fixed ${isWaitlistHidden ? '-bottom-40 lg:right-2 left-1/2 -translate-x-1/2 lg:translate-x-0  ' : 'bottom-2 lg:bottom-5 lg:right-10 left-1/2 -translate-x-1/2 lg:translate-x-0'} transition-all duration-300 flex flex-col gap-2 items-center  w-[15rem] md:w-[20rem] rounded-md bg-neutral-950 p-3 ring-1 ring-neutral-900 hover:scale-[1px] hover:scale`}>
+        <div className="w-full flex items-center justify-start " onClick={()=> {setWaitlistHidden(prev => !prev)}}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" className="cursor-pointer hover:bg-neutral-800 rounded-full" height="28" fill="#FFFFFF" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm45.66-109.66a8,8,0,0,1,0,11.32l-40,40a8,8,0,0,1-11.32,0l-40-40a8,8,0,0,1,11.32-11.32L128,140.69l34.34-34.35A8,8,0,0,1,173.66,106.34Z"></path></svg>
         </div>
         <div className="text-base font-light text-white text-center">Get 30 days for free when we launch the full version.</div>
         <input className="w-full h-10 outline-none focus:outline-none rounded-md p-2 bg-neutral-200 text-black" type="email" id="email" name="email" placeholder="Email" required={true} />
